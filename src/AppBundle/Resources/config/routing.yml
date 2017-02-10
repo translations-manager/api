@@ -1,0 +1,11 @@
+projects:
+    type:     rest
+    resource: AppBundle\Controller\ProjectController
+
+phrases:
+    type:     rest
+    resource: AppBundle\Controller\PhraseController
+
+translations:
+    type:     rest
+    resource: AppBundle\Controller\TranslationController

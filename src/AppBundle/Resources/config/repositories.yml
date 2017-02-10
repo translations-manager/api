@@ -1,0 +1,16 @@
+services:
+    app.repository.phrase:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.default_entity_manager", "getRepository"]
+        arguments:
+            - "AppBundle:Phrase"
+    app.repository.project:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.default_entity_manager", "getRepository"]
+        arguments:
+            - "AppBundle:Project"
+    app.repository.translation:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.default_entity_manager", "getRepository"]
+        arguments:
+            - "AppBundle:Translation"

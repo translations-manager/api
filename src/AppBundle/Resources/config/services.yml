@@ -1,0 +1,6 @@
+imports:
+    - { resource: builders.yml }
+    - { resource: events.yml }
+    - { resource: managers.yml }
+    - { resource: param_converters.yml }
+    - { resource: repositories.yml }

@@ -1,0 +1,7 @@
+services:
+    app.param_converter.project:
+        class: AppBundle\ParamConverter\ProjectParamConverter
+        arguments:
+            - "@app.manager.project"
+        tags:
+            - { name: request.param_converter, converter: project_param_converter }

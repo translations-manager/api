@@ -1,0 +1,16 @@
+services:
+    app.manager.phrase:
+        class: AppBundle\Manager\PhraseManager
+        arguments:
+            - "@app.repository.phrase"
+            - "@doctrine.orm.entity_manager"
+    app.manager.project:
+        class: AppBundle\Manager\ProjectManager
+        arguments:
+            - "@app.repository.project"
+            - "@doctrine.orm.entity_manager"
+    app.manager.translation:
+        class: AppBundle\Manager\TranslationManager
+        arguments:
+            - "@app.repository.translation"
+            - "@doctrine.orm.entity_manager"
