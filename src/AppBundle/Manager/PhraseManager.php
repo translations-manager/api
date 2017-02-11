@@ -49,4 +49,13 @@ class PhraseManager
         $this->entityManager->persist($phrase);
         $this->entityManager->flush();
     }
+
+    /**
+     * @param Phrase $phrase
+     */
+    public function deletePhrase(Phrase $phrase)
+    {
+        $this->entityManager->remove($phrase);
+        $this->entityManager->flush();
+    }
 }

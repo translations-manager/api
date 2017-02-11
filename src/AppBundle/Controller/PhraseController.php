@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Phrase;
 use AppBundle\Form\Type\PhraseType;
 use FOS\RestBundle\Controller\Annotations\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -47,5 +48,21 @@ class PhraseController extends RestController
         $this->get('app.manager.phrase')->savePhrase($phrase);
 
         return $this->handleResponse($phrase, Response::HTTP_CREATED);
+    }
+
+    /**
+     * @param Phrase $phrase
+     *
+     * @return Response
+     *
+     * @Route("/phrases/{id}")
+     *
+     * @ParamConverter("phrase", class="AppBundle:Phrase")
+     */
+    public function deletePhraseAction(Phrase $phrase)
+    {
+        $this->get('app.manager.phrase')->deletePhrase($phrase);
+
+        return $this->handleResponse(null);
     }
 }
