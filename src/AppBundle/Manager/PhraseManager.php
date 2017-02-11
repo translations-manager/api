@@ -3,13 +3,14 @@
 namespace AppBundle\Manager;
 
 use AppBundle\Entity\Phrase;
+use AppBundle\Repository\PhraseRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 class PhraseManager
 {
     /**
-     * @var EntityRepository
+     * @var PhraseRepository
      */
     private $phraseRepository;
 
@@ -19,21 +20,24 @@ class PhraseManager
     private $entityManager;
 
     /**
-     * @param EntityRepository $phraseRepository
+     * @param PhraseRepository $phraseRepository
      * @param EntityManager $entityManager
      */
-    public function __construct(EntityRepository $phraseRepository, EntityManager $entityManager)
+    public function __construct(PhraseRepository $phraseRepository, EntityManager $entityManager)
     {
         $this->phraseRepository = $phraseRepository;
         $this->entityManager = $entityManager;
     }
 
     /**
+     * @param int $projectId
+     * @param array $domainsIds
+     *
      * @return Phrase[]
      */
-    public function listPhrases()
+    public function listPhrases($projectId, array $domainsIds)
     {
-        return $this->phraseRepository->findAll();
+        return $this->phraseRepository->search($projectId, $domainsIds);
     }
 
     /**

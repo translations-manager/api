@@ -1,6 +1,6 @@
 services:
     app.repository.phrase:
-        class: Doctrine\ORM\EntityRepository
+        class: AppBundle\Repository\PhraseRepository
         factory: ["@doctrine.orm.default_entity_manager", "getRepository"]
         arguments:
             - "AppBundle:Phrase"
