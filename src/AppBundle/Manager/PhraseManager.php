@@ -32,12 +32,13 @@ class PhraseManager
     /**
      * @param int $projectId
      * @param array $domainsIds
+     * @param string $query
      *
      * @return Phrase[]
      */
-    public function listPhrases($projectId, array $domainsIds)
+    public function listPhrases($projectId, array $domainsIds, $query)
     {
-        return $this->phraseRepository->search($projectId, $domainsIds);
+        return $this->phraseRepository->search($projectId, $domainsIds, $query);
     }
 
     /**

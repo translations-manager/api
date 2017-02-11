@@ -21,7 +21,8 @@ class PhraseController extends RestController
             ->get('app.manager.phrase')
             ->listPhrases(
                 $request->get('project'),
-                $request->get('domain_ids', [])
+                $request->get('domain_ids', []),
+                $request->get('q', '')
             )
         ;
 
