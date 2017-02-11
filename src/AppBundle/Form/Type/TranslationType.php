@@ -19,6 +19,10 @@ class TranslationType extends AbstractType
             ->add('locale')
             ->add('content')
         ;
+
+        if (isset($options['method'])) {
+            $builder->setMethod($options['method']);
+        }
     }
 
     /**
