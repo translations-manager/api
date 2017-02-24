@@ -10,7 +10,7 @@ services:
         arguments:
             - "AppBundle:Project"
     app.repository.translation:
-        class: Doctrine\ORM\EntityRepository
+        class: AppBundle\Repository\TranslationRepository
         factory: ["@doctrine.orm.default_entity_manager", "getRepository"]
         arguments:
             - "AppBundle:Translation"

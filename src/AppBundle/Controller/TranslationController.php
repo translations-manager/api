@@ -50,4 +50,18 @@ class TranslationController extends RestController
 
         return $this->handleResponse($translation);
     }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function getTranslationsAction(Request $request)
+    {
+        return $this->handleResponse($this->get('app.manager.translation')->exportTranslations(
+            $request->get('domain_ids', []),
+            $request->get('location_ids', []),
+            $request->get('locale_ids', [])
+        ));
+    }
 }

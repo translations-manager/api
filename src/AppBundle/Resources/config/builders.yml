@@ -1,3 +1,5 @@
 services:
     app.builder.phrases_response:
         class: AppBundle\Builder\PhrasesResponseBuilder
+    app.builder.translations_export_response:
+        class: AppBundle\Builder\TranslationsExportResponseBuilder

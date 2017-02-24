@@ -14,3 +14,4 @@ services:
         arguments:
             - "@app.repository.translation"
             - "@doctrine.orm.entity_manager"
+            - "@app.builder.translations_export_response"
