@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Domain;
+use AppBundle\Entity\FileLocation;
 use AppBundle\Entity\Phrase;
 use Doctrine\ORM\EntityRepository;
 
@@ -39,5 +41,23 @@ class PhraseRepository extends EntityRepository
         }
 
         return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * @param Domain $domain
+     * @param FileLocation $fileLocation
+     *
+     * @return Phrase[]
+     */
+    public function findForImport(Domain $domain, FileLocation $fileLocation)
+    {
+        return $this
+            ->createQueryBuilder('p')
+            ->where('p.domain = :domain')
+            ->andWhere('p.fileLocation = :fileLocation')
+            ->setParameter('domain', $domain)
+            ->setParameter('fileLocation', $fileLocation)
+            ->getQuery()
+            ->getResult();
     }
 }

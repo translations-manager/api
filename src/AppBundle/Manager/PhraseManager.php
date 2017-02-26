@@ -2,6 +2,8 @@
 
 namespace AppBundle\Manager;
 
+use AppBundle\Entity\Domain;
+use AppBundle\Entity\FileLocation;
 use AppBundle\Entity\Phrase;
 use AppBundle\Repository\PhraseRepository;
 use Doctrine\ORM\EntityManager;
@@ -57,5 +59,21 @@ class PhraseManager
     {
         $this->entityManager->remove($phrase);
         $this->entityManager->flush();
+    }
+
+    /**
+     * @param Domain $domain
+     * @param FileLocation $fileLocation
+     *
+     * @return Phrase[]
+     */
+    public function getPhrasesForImport(Domain $domain, FileLocation $fileLocation)
+    {
+        $phrases = $this->phraseRepository->findForImport($domain, $fileLocation);
+
+        return array_combine(
+            array_map(function(Phrase $phrase) { return $phrase->getKey(); }, $phrases),
+            $phrases
+        );
     }
 }

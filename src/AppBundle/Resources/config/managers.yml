@@ -1,4 +1,16 @@
 services:
+    app.manager.domain:
+        class: AppBundle\Manager\DomainManager
+        arguments:
+            - "@app.repository.domain"
+    app.manager.file_location:
+        class: AppBundle\Manager\FileLocationManager
+        arguments:
+            - "@app.repository.file_location"
+    app.manager.locale:
+        class: AppBundle\Manager\LocaleManager
+        arguments:
+            - "@app.repository.locale"
     app.manager.phrase:
         class: AppBundle\Manager\PhraseManager
         arguments:

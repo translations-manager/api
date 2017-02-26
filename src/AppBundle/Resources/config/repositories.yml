@@ -1,4 +1,19 @@
 services:
+    app.repository.domain:
+        class: AppBundle\Repository\DomainRepository
+        factory: ["@doctrine.orm.default_entity_manager", "getRepository"]
+        arguments:
+            - "AppBundle:Domain"
+    app.repository.file_location:
+        class: AppBundle\Repository\FileLocationRepository
+        factory: ["@doctrine.orm.default_entity_manager", "getRepository"]
+        arguments:
+            - "AppBundle:FileLocation"
+    app.repository.locale:
+        class: AppBundle\Repository\LocaleRepository
+        factory: ["@doctrine.orm.default_entity_manager", "getRepository"]
+        arguments:
+            - "AppBundle:Domain"
     app.repository.phrase:
         class: AppBundle\Repository\PhraseRepository
         factory: ["@doctrine.orm.default_entity_manager", "getRepository"]

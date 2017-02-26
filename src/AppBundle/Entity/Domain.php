@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\DomainRepository")
  */
 class Domain
 {

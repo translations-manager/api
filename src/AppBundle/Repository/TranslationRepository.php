@@ -2,6 +2,9 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Domain;
+use AppBundle\Entity\FileLocation;
+use AppBundle\Entity\Locale;
 use AppBundle\Entity\Translation;
 use Doctrine\ORM\EntityRepository;
 
@@ -35,5 +38,27 @@ class TranslationRepository extends EntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    /**
+     * @param Domain $domain
+     * @param FileLocation $fileLocation
+     * @param Locale $locale
+     *
+     * @return Translation[]
+     */
+    public function findForImport(Domain $domain, FileLocation $fileLocation, Locale $locale)
+    {
+        return $this
+            ->createQueryBuilder('t')
+            ->join('t.phrase', 'p')
+            ->where('p.domain = :domain')
+            ->andWhere('p.fileLocation = :fileLocation')
+            ->andWhere('t.locale = :locale')
+            ->setParameter('domain', $domain)
+            ->setParameter('fileLocation', $fileLocation)
+            ->setParameter('locale', $locale)
+            ->getQuery()
+            ->getResult();
     }
 }

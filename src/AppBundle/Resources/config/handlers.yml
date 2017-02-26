@@ -1,0 +1,11 @@
+services:
+    app.handler.import_translations:
+        class: AppBundle\Handler\ImportTranslationsHandler
+        arguments:
+            - "@app.manager.project"
+            - "@app.manager.domain"
+            - "@app.manager.file_location"
+            - "@app.manager.locale"
+            - "@app.manager.phrase"
+            - "@app.manager.translation"
+            - "@doctrine.orm.entity_manager"

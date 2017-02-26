@@ -3,6 +3,9 @@
 namespace AppBundle\Manager;
 
 use AppBundle\Builder\TranslationsExportResponseBuilder;
+use AppBundle\Entity\Domain;
+use AppBundle\Entity\FileLocation;
+use AppBundle\Entity\Locale;
 use AppBundle\Entity\Translation;
 use AppBundle\Repository\TranslationRepository;
 use Doctrine\ORM\EntityManager;
@@ -60,5 +63,24 @@ class TranslationManager
         $translations = $this->translationRepository->export($domainIds, $locationIds, $localeIds);
 
         return $this->translationsExportBuilder->build($translations);
+    }
+
+    /**
+     * @param Domain $domain
+     * @param FileLocation $fileLocation
+     * @param Locale $locale
+     *
+     * @return Translation[]
+     */
+    public function getTranslationsForImport(Domain $domain, FileLocation $fileLocation, Locale $locale)
+    {
+        $translations = $this->translationRepository->findForImport($domain, $fileLocation, $locale);
+
+        return array_combine(
+            array_map(function(Translation $translation) {
+                return $translation->getPhrase()->getKey();
+            }, $translations),
+            $translations
+        );
     }
 }
