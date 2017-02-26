@@ -2,6 +2,7 @@
 
 namespace AppBundle\Manager;
 
+use AppBundle\Entity\Domain;
 use AppBundle\Entity\Project;
 use AppBundle\Repository\DomainRepository;
 
@@ -23,9 +24,11 @@ class DomainManager
     /**
      * @param Project $project
      * @param string $name
+     *
+     * @return Domain
      */
     public function retrieveDomain(Project $project, $name)
     {
-        $this->domainRepository->mergeDomain($project, $name);
+        return $this->domainRepository->mergeDomain($project, $name);
     }
 }

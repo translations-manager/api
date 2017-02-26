@@ -6,6 +6,7 @@ use AppBundle\Entity\Translation;
 use AppBundle\Form\Type\TranslationType;
 use FOS\RestBundle\Controller\Annotations\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -63,5 +64,19 @@ class TranslationController extends RestController
             $request->get('location_ids', []),
             $request->get('locale_ids', [])
         ));
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     *
+     * @Route("/translations/import")
+     */
+    public function postImportTranslationsAction(Request $request)
+    {
+        $this->get('app.handler.import_translations')->import($request);
+
+        return new JsonResponse(null, Response::HTTP_OK);
     }
 }

@@ -23,9 +23,11 @@ class LocaleManager
     /**
      * @param Project $project
      * @param string $code
+     *
+     * @return Locale
      */
     public function retrieveLocale(Project $project, $code)
     {
-        $this->localeRepository->mergeLocale($project, $code);
+        return $this->localeRepository->mergeLocale($project, $code);
     }
 }

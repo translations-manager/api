@@ -13,7 +13,7 @@ services:
         class: AppBundle\Repository\LocaleRepository
         factory: ["@doctrine.orm.default_entity_manager", "getRepository"]
         arguments:
-            - "AppBundle:Domain"
+            - "AppBundle:Locale"
     app.repository.phrase:
         class: AppBundle\Repository\PhraseRepository
         factory: ["@doctrine.orm.default_entity_manager", "getRepository"]

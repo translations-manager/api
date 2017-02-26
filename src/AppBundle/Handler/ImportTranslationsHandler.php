@@ -11,6 +11,7 @@ use AppBundle\Manager\PhraseManager;
 use AppBundle\Manager\ProjectManager;
 use AppBundle\Manager\TranslationManager;
 use Doctrine\ORM\EntityManager;
+use Monolog\Logger;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -53,6 +54,11 @@ class ImportTranslationsHandler
     private $entityManager;
 
     /**
+     * @var Logger
+     */
+    private $logger;
+
+    /**
      * @param ProjectManager $projectManager
      * @param DomainManager $domainManager
      * @param FileLocationManager $fileLocationManager
@@ -60,6 +66,7 @@ class ImportTranslationsHandler
      * @param PhraseManager $phraseManager
      * @param TranslationManager $translationManager
      * @param EntityManager $entityManager
+     * @param Logger $logger
      */
     public function __construct(
         ProjectManager $projectManager,
@@ -68,7 +75,8 @@ class ImportTranslationsHandler
         LocaleManager $localeManager,
         PhraseManager $phraseManager,
         TranslationManager $translationManager,
-        EntityManager $entityManager
+        EntityManager $entityManager,
+        Logger $logger
     ) {
         $this->projectManager = $projectManager;
         $this->domainManager = $domainManager;
@@ -77,6 +85,7 @@ class ImportTranslationsHandler
         $this->phraseManager = $phraseManager;
         $this->translationsManager = $translationManager;
         $this->entityManager = $entityManager;
+        $this->logger = $logger;
     }
 
     /**
