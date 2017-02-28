@@ -22,8 +22,8 @@ class UserAuthenticator extends AbstractGuardAuthenticator
     public function getCredentials(Request $request)
     {
         $token = $request->headers->get('X-AUTH-TOKEN');
-        $username = $request->request->get('username');
-        $password = $request->request->get('password');
+        $username = $request->request->get('username', $request->headers->get('X-USERNAME'));
+        $password = $request->request->get('password', $request->headers->get('X-PASSWORD'));
 
         if (!$token && (!$username || !$password)) {
             return null;
@@ -45,7 +45,7 @@ class UserAuthenticator extends AbstractGuardAuthenticator
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         if (isset($credentials['token'])) {
-            return $userProvider->loadUserByUsername($credentials['token']);
+            return $userProvider->loadUserByToken($credentials['token']);
         }
 
         return $userProvider->loadUserByUsername($credentials['username']);

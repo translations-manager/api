@@ -4,8 +4,6 @@ security:
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
         doctrine:
             id: app.security.user_provider
 
@@ -20,6 +18,7 @@ security:
             guard:
                 authenticators:
                     - app.security.user_authenticator
+            stateless: true
             # activate different ways to authenticate
 
             # http_basic: ~
