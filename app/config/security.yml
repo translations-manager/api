@@ -6,6 +6,8 @@ security:
     providers:
         in_memory:
             memory: ~
+        doctrine:
+            id: app.security.user_provider
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -15,6 +17,9 @@ security:
 
         main:
             anonymous: ~
+            guard:
+                authenticators:
+                    - app.security.user_authenticator
             # activate different ways to authenticate
 
             # http_basic: ~
@@ -22,3 +27,5 @@ security:
 
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+    access_control:
+        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }

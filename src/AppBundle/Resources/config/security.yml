@@ -1,0 +1,7 @@
+services:
+    app.security.user_provider:
+        class: AppBundle\Security\UserProvider
+        arguments:
+            - "@app.repository.user"
+    app.security.user_authenticator:
+        class: AppBundle\Security\UserAuthenticator

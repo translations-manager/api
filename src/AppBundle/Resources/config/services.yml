@@ -5,3 +5,4 @@ imports:
     - { resource: managers.yml }
     - { resource: param_converters.yml }
     - { resource: repositories.yml }
+    - { resource: security.yml }
