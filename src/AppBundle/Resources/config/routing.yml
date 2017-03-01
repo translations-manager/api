@@ -9,3 +9,7 @@ phrases:
 translations:
     type:     rest
     resource: AppBundle\Controller\TranslationController
+
+security:
+    type:     rest
+    resource: AppBundle\Controller\SecurityController

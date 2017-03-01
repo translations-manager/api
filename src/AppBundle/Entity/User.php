@@ -94,6 +94,14 @@ class User implements UserInterface
     }
 
     /**
+     * @return string
+     */
+    public function getAuthToken()
+    {
+        return $this->authToken;
+    }
+
+    /**
      * @param string $authToken
      */
     public function setAuthToken($authToken)

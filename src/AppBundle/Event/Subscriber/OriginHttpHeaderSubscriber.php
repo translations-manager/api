@@ -34,7 +34,13 @@ class OriginHttpHeaderSubscriber implements EventSubscriberInterface
 
             $response->headers->add([
                 'Access-Control-Allow-Origin' => $this->clientUrl,
-                'Access-Control-Allow-Methods' => implode(',', [Request::METHOD_PUT, Request::METHOD_DELETE])
+                'Access-Control-Allow-Methods' => implode(',', [
+                    Request::METHOD_GET,
+                    Request::METHOD_POST,
+                    Request::METHOD_PUT,
+                    Request::METHOD_DELETE
+                ]),
+                'Access-Control-Allow-Headers' => 'X-AUTH-TOKEN'
             ]);
 
             $event->setResponse($response);
