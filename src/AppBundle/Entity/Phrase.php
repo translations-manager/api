@@ -36,7 +36,7 @@ class Phrase
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Domain", inversedBy="phrases")
      * @ORM\JoinColumn(onDelete="CASCADE")
      *
-     * @Serializer\Type("AppBundle\Entity\Domain")
+     * @Serializer\Exclude
      */
     private $domain;
 
@@ -46,7 +46,7 @@ class Phrase
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\FileLocation", inversedBy="phrases")
      * @ORM\JoinColumn(onDelete="CASCADE")
      *
-     * @Serializer\Type("AppBundle\Entity\FileLocation")
+     * @Serializer\Exclude
      */
     private $fileLocation;
 
@@ -54,6 +54,8 @@ class Phrase
      * @var Translation[]
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Translation", mappedBy="phrase", cascade={"all"}, orphanRemoval=true)
+     *
+     * @Serializer\Exclude
      */
     private $translations;
 

@@ -19,6 +19,7 @@ class Project
      * @ORM\GeneratedValue(strategy="AUTO")
      *
      * @Serializer\Type("integer")
+     * @Serializer\Groups({"list"})
      */
     private $id;
 
@@ -28,6 +29,7 @@ class Project
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Type("string")
+     * @Serializer\Groups({"list"})
      */
     private $name;
 

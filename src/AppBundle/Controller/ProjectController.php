@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Project;
 use AppBundle\Form\Type\ProjectType;
 use FOS\RestBundle\Controller\Annotations\Route;
+use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +17,13 @@ class ProjectController extends RestController
      */
     public function getProjectsAction()
     {
-        return $this->handleResponse($this->get('app.manager.project')->listProjects());
+        $projects = $this->get('app.manager.project')->listProjects();
+
+        $serialized = $this
+            ->get('jms_serializer')
+            ->serialize($projects, 'json', SerializationContext::create()->setGroups(['list']));
+
+        return $this->handleJsonEncodedResponse($serialized);
     }
 
     /**
@@ -82,6 +89,6 @@ class ProjectController extends RestController
     {
         $this->get('app.manager.project')->deleteProject($project);
 
-        return $this->handleResponse(null);
+        return $this->handleResponse([]);
     }
 }

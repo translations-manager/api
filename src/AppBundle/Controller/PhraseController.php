@@ -63,6 +63,6 @@ class PhraseController extends RestController
     {
         $this->get('app.manager.phrase')->deletePhrase($phrase);
 
-        return $this->handleResponse(null);
+        return $this->handleResponse([]);
     }
 }
