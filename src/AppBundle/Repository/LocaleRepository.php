@@ -29,7 +29,11 @@ class LocaleRepository extends EntityRepository
         if (!$locale) {
             $explodedlocaleCode = explode('_', $localeCode);
             $regionCode = isset($explodedlocaleCode[1]) ? isset($explodedlocaleCode[1]) : null;
-            $languageName = Intl::getLanguageBundle()->getLanguageName($explodedlocaleCode[0], $regionCode);
+            $languageName = Intl::getLanguageBundle()->getLanguageName(
+                $explodedlocaleCode[0],
+                $regionCode,
+                $localeCode
+            );
             $locale = new Locale();
             $locale->setProject($project);
             $locale->setCode($localeCode);
