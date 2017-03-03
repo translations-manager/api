@@ -27,7 +27,9 @@ class LocaleRepository extends EntityRepository
             ->getOneOrNullResult();
 
         if (!$locale) {
-            $languageName = Intl::getLanguageBundle()->getLanguageName($localeCode);
+            $explodedlocaleCode = explode('_', $localeCode);
+            $regionCode = isset($explodedlocaleCode[1]) ? isset($explodedlocaleCode[1]) : null;
+            $languageName = Intl::getLanguageBundle()->getLanguageName($explodedlocaleCode[0], $regionCode);
             $locale = new Locale();
             $locale->setProject($project);
             $locale->setCode($localeCode);
