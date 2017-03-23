@@ -35,12 +35,16 @@ class PhraseManager
      * @param int $projectId
      * @param array $domainsIds
      * @param string $query
+     * @param int $page
      *
      * @return Phrase[]
      */
-    public function listPhrases($projectId, array $domainsIds, $query)
+    public function listPhrases($projectId, array $domainsIds, $query, $page)
     {
-        return $this->phraseRepository->search($projectId, $domainsIds, $query);
+        return [
+            'phrases' => $this->phraseRepository->search($projectId, $domainsIds, $query, $page),
+            'metadata' => $this->phraseRepository->getSearchMetadata($projectId, $domainsIds, $query)
+        ];
     }
 
     /**

@@ -18,18 +18,22 @@ class PhraseController extends RestController
      */
     public function getPhrasesAction(Request $request)
     {
-        $phrases = $this
+        $search = $this
             ->get('app.manager.phrase')
             ->listPhrases(
                 $request->get('project'),
                 $request->get('domain_ids', []),
-                $request->get('q', '')
+                $request->get('q', ''),
+                intval($request->get('page', 1))
             )
         ;
 
-        return $this->handleResponse(
-            $this->get('app.builder.phrases_response')->build($phrases, $request->get('locale_ids', []))
-        );
+        return $this->handleResponse([
+            'phrases' => $this
+                ->get('app.builder.phrases_response')
+                ->build($search['phrases'], $request->get('locale_ids', [])),
+            'metadata' => $search['metadata']
+        ]);
     }
 
     /**

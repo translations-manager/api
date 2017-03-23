@@ -6,17 +6,20 @@ use AppBundle\Entity\Domain;
 use AppBundle\Entity\FileLocation;
 use AppBundle\Entity\Phrase;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 class PhraseRepository extends EntityRepository
 {
+    const NB_RESULTS_PER_PAGE = 20;
+
     /**
      * @param int $projectId
      * @param array $domainsIds
      * @param string $query
      *
-     * @return Phrase[]
+     * @return QueryBuilder
      */
-    public function search($projectId, array $domainsIds, $query)
+    private function getSearchQueryBuilder($projectId, array $domainsIds, $query)
     {
         $queryBuilder = $this
             ->createQueryBuilder('p')
@@ -40,7 +43,46 @@ class PhraseRepository extends EntityRepository
                 ->setParameter('query', sprintf('%%%s%%', $query));
         }
 
-        return $queryBuilder->getQuery()->getResult();
+        return $queryBuilder;
+    }
+
+    /**
+     * @param int $projectId
+     * @param array $domainsIds
+     * @param string $query
+     *
+     * @return array
+     */
+    public function getSearchMetadata($projectId, array $domainsIds, $query)
+    {
+        $count = $this
+            ->getSearchQueryBuilder($projectId, $domainsIds, $query)
+            ->select('COUNT (p.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return [
+            'total' => $count,
+            'nb_pages' => ceil($count / self::NB_RESULTS_PER_PAGE)
+        ];
+    }
+
+    /**
+     * @param int $projectId
+     * @param array $domainsIds
+     * @param string $query
+     * @param int $page
+     *
+     * @return Phrase[]
+     */
+    public function search($projectId, array $domainsIds, $query, $page)
+    {
+        return $this
+            ->getSearchQueryBuilder($projectId, $domainsIds, $query)
+            ->setFirstResult(($page - 1) * self::NB_RESULTS_PER_PAGE)
+            ->setMaxResults(self::NB_RESULTS_PER_PAGE)
+            ->getQuery()
+            ->getResult();
     }
 
     /**
