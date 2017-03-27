@@ -28,7 +28,6 @@ class PhraseRepository extends EntityRepository
             ->andWhere('d.project = :project')
             ->andWhere('l.project = :project')
             ->setParameter('project', $projectId)
-            ->groupBy('p.id')
         ;
 
         if ($domainsIds) {
@@ -58,7 +57,7 @@ class PhraseRepository extends EntityRepository
     {
         $count = $this
             ->getSearchQueryBuilder($projectId, $domainsIds, $query)
-            ->select('COUNT (p.id)')
+            ->select('COUNT DISTINCT p.id')
             ->getQuery()
             ->getSingleScalarResult();
 
@@ -82,6 +81,7 @@ class PhraseRepository extends EntityRepository
             ->getSearchQueryBuilder($projectId, $domainsIds, $query)
             ->setFirstResult(($page - 1) * self::NB_RESULTS_PER_PAGE)
             ->setMaxResults(self::NB_RESULTS_PER_PAGE)
+            ->groupBy('p.id')
             ->getQuery()
             ->getResult();
     }
