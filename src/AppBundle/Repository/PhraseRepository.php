@@ -28,6 +28,7 @@ class PhraseRepository extends EntityRepository
             ->andWhere('d.project = :project')
             ->andWhere('l.project = :project')
             ->setParameter('project', $projectId)
+            ->groupBy('t.id')
         ;
 
         if ($domainsIds) {
