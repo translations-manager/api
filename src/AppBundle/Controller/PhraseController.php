@@ -18,7 +18,7 @@ class PhraseController extends RestController
      */
     public function getPhrasesAction(Request $request)
     {
-        $page = intval($request->get('page', 1);
+        $page = intval($request->get('page', 1));
 
         $search = $this
             ->get('app.manager.phrase')
