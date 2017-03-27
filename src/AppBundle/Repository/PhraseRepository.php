@@ -57,7 +57,7 @@ class PhraseRepository extends EntityRepository
     {
         $count = $this
             ->getSearchQueryBuilder($projectId, $domainsIds, $query)
-            ->select('COUNT DISTINCT p.id')
+            ->select('COUNT (DISTINCT p.id)')
             ->getQuery()
             ->getSingleScalarResult();
 
