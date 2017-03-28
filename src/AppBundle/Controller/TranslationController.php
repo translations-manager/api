@@ -47,6 +47,10 @@ class TranslationController extends RestController
         ]);
         $form->handleRequest($request);
 
+        if ($translation->getContent() === null) {
+            $translation->setContent('');
+        }
+
         $this->get('app.manager.translation')->saveTranslation($translation);
 
         return $this->handleResponse($translation);
