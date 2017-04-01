@@ -25,6 +25,10 @@ class TranslationController extends RestController
         $form = $this->createApiForm(TranslationType::class, $translation);
         $form->handleRequest($request);
 
+        if ($translation->getContent() === null) {
+            $translation->setContent('');
+        }
+
         $this->get('app.manager.translation')->saveTranslation($translation);
 
         return $this->handleResponse($translation, Response::HTTP_CREATED);
