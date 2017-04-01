@@ -19,6 +19,7 @@ class Domain
      * @ORM\GeneratedValue(strategy="AUTO")
      *
      * @Serializer\Type("integer")
+     * @Serializer\Groups({"read", "import"})
      */
     private $id;
 
@@ -28,6 +29,7 @@ class Domain
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Type("string")
+     * @Serializer\Groups({"read", "import"})
      */
     private $name;
 
@@ -47,6 +49,7 @@ class Domain
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Phrase", mappedBy="fileLocation", cascade={"all"}, orphanRemoval=true)
      *
      * @Serializer\Type("array<AppBundle\Entity\Phrase>")
+     * @Serializer\Groups({"import"})
      */
     private $phrases;
 

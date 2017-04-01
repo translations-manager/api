@@ -37,7 +37,7 @@ class ProjectController extends RestController
      */
     public function getProjectAction(Project $project)
     {
-        return $this->handleResponse($project);
+        return $this->handleResponseToGroupSerialize($project, ['read']);
     }
 
     /**

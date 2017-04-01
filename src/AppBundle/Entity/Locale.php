@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\LocaleRepository")
@@ -15,6 +16,9 @@ class Locale
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Serializer\Type("integer")
+     * @Serializer\Groups({"read"})
      */
     private $id;
 
@@ -22,6 +26,9 @@ class Locale
      * @var string
      *
      * @ORM\Column(type="string", length=5)
+     *
+     * @Serializer\Type("string")
+     * @Serializer\Groups({"read"})
      */
     private $code;
 
@@ -29,6 +36,9 @@ class Locale
      * @var string
      *
      * @ORM\Column(type="string", length=100)
+     *
+     * @Serializer\Type("string")
+     * @Serializer\Groups({"read"})
      */
     private $name;
 
@@ -37,6 +47,8 @@ class Locale
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Project", inversedBy="locales")
      * @ORM\JoinColumn(onDelete="CASCADE")
+     *
+     * @Serializer\Exclude
      */
     private $project;
 

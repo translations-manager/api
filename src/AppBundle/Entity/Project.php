@@ -19,7 +19,7 @@ class Project
      * @ORM\GeneratedValue(strategy="AUTO")
      *
      * @Serializer\Type("integer")
-     * @Serializer\Groups({"list"})
+     * @Serializer\Groups({"read", "list"})
      */
     private $id;
 
@@ -29,7 +29,7 @@ class Project
      * @ORM\Column(type="string", length=255)
      *
      * @Serializer\Type("string")
-     * @Serializer\Groups({"list"})
+     * @Serializer\Groups({"read", "list"})
      */
     private $name;
 
@@ -39,6 +39,7 @@ class Project
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Domain", mappedBy="project", orphanRemoval=true, cascade={"all"})
      *
      * @Serializer\Type("array<AppBundle\Entity\Domain>")
+     * @Serializer\Groups({"read"})
      */
     private $domains;
 
@@ -48,6 +49,7 @@ class Project
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Locale", mappedBy="project", orphanRemoval=true, cascade={"all"})
      *
      * @Serializer\Type("array<AppBundle\Entity\Locale>")
+     * @Serializer\Groups({"read"})
      */
     private $locales;
 
@@ -57,6 +59,7 @@ class Project
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\FileLocation", mappedBy="project", cascade={"all"}, orphanRemoval=true)
      *
      * @Serializer\Type("array<AppBundle\Entity\FileLocation>")
+     * @Serializer\Groups({"read"})
      */
     private $fileLocations;
 

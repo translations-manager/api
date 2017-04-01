@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpFoundation\Response;
 
 class RestController extends FOSRestController
@@ -28,6 +29,22 @@ class RestController extends FOSRestController
     public function handleResponse($data, $statusCode = Response::HTTP_OK)
     {
         return $this->handleView($this->view($data, $statusCode));
+    }
+
+    /**
+     * @param mixed $data
+     * @param array $groups
+     * @param int $statusCode
+     *
+     * @return Response
+     */
+    public function handleResponseToGroupSerialize($data, array $groups, $statusCode = Response::HTTP_OK)
+    {
+        $serialized = $this
+            ->get('jms_serializer')
+            ->serialize($data, 'json', SerializationContext::create()->setGroups($groups));
+
+        return $this->handleJsonEncodedResponse($serialized, $statusCode);
     }
 
     /**
