@@ -103,7 +103,7 @@ class ImportTranslationsHandler
             throw new BadRequestHttpException;
         }
 
-        if (pathinfo($filePath) === 'json' && is_string($request->get('domain'))) {
+        if (pathinfo($filePath)['extension'] === 'json' && is_string($request->get('domain'))) {
             $domainName = $request->get('domain');
             $localeCode = pathinfo($filePath)['filename'];
         } else {
