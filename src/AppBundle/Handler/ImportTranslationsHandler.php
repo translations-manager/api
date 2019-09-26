@@ -103,7 +103,12 @@ class ImportTranslationsHandler
             throw new BadRequestHttpException;
         }
 
-        list($domainName, $localeCode) = explode('.', basename($filePath));
+        if (pathinfo($filePath) === 'json' && is_string($request->get('domain'))) {
+            $domainName = $request->get('domain');
+            $localeCode = pathinfo($filePath)['filename'];
+        } else {
+            list($domainName, $localeCode) = explode('.', basename($filePath));
+        }
 
         $domain = $this->domainManager->retrieveDomain($project, $domainName);
         $fileLocation = $this->fileLocationManager->retrieveFileLocation($project, dirname($filePath));
