@@ -16,7 +16,7 @@ php composer-setup.php
 php -r "unlink('composer-setup.php');"
 ```
 
-### Install
+### Install
 ```bash
 php composer install
 php bin/console doctrine:database:create # --env=prod eventually
